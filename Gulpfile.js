@@ -6,6 +6,7 @@ var yargs = require('yargs');
 var stylish = require('jshint-stylish');
 var plugins = require('gulp-load-plugins')();
 var tasklist = require('gulp-task-listing');
+var autoprefixer = require('autoprefixer');
 
 // read package.json
 var pkg = require('./package.json');
@@ -57,6 +58,9 @@ gulp.task('css:libs', function () {
 gulp.task('css:dist', function () {
  return gulp.src([gconf.src.styles])
             .pipe(plugins.sass({outputStyle: 'compressed'}))
+            .pipe(plugins.postcss([
+              autoprefixer({browsers: ['last 2 version']})]
+            ))
             .pipe(plugins.concat(gconf.dist.styles.app))
             .pipe(gulp.dest(gconf.dist.styles.root));
 });
