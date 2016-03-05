@@ -59,6 +59,7 @@ Directory Structure
 |-- src: application source code
     |-- index.jade
     |-- app.js (application setup)
+    |-- sass (stylesheet assets)
     |-- images (image assets)
     |-- [feature]
         |-- [feature template].html

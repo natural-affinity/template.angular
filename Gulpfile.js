@@ -17,6 +17,7 @@ var gconf = {
   src: {
     root: 'src/',
     index: 'src/index.jade',
+    styles: 'src/sass/**/*.scss',
     scripts: 'src/**/*.js',
     templates: 'src/**/*.html'
   },
@@ -49,9 +50,17 @@ gulp.task('copy:html', function () {
 
 gulp.task('css:libs', function () {
   gulp.src(['bower_components/angular-material/angular-material.min.css'])
-      .pipe(plugins.concat(gconf.dist.styles.app))
+      .pipe(plugins.concat(gconf.dist.styles.lib))
       .pipe(gulp.dest(gconf.dist.styles.root));
 });
+
+gulp.task('css:dist', function () {
+ return gulp.src([gconf.src.styles])
+            .pipe(plugins.sass({outputStyle: 'compressed'}))
+            .pipe(plugins.concat(gconf.dist.styles.app))
+            .pipe(gulp.dest(gconf.dist.styles.root));
+});
+
 
 gulp.task('jshint', function () {
   return gulp.src(['Gulpfile.js', gconf.src.scripts])
@@ -101,8 +110,9 @@ gulp.task('webserver', function () {
 
 gulp.task('watch', function () {
   gulp.watch([gconf.src.index], ['jade']);
-  gulp.watch([gconf.src.templates], ['copy:html', 'jade']);
+  gulp.watch([gconf.src.styles], ['css:dist']);
   gulp.watch([gconf.src.scripts], ['jshint', 'js:dist']);
+  gulp.watch([gconf.src.templates], ['copy:html', 'jade']);
   gulp.watch(['Gulpfile.js'], ['build']);
 });
 
