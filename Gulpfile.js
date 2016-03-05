@@ -10,7 +10,9 @@ var tasklist = require('gulp-task-listing');
 var pkg = require('./package.json');
 
 var gconf = {
-  app: 'myApp',
+  app: {
+    name: 'myApp'
+  },
   src: {
     root: 'src/',
     index: 'src/index.jade',
@@ -61,6 +63,7 @@ gulp.task('js:libs', function () {
 gulp.task('js:dist', function () {
   return gulp.src(['src/**/*.js'])
     .pipe(plugins.concat(gconf.dist.scripts.app))
+    .pipe(plugins.replace('replace.application.name', gconf.app.name))
     .pipe(gulp.dest(gconf.dist.scripts.root));
 });
 
@@ -68,7 +71,7 @@ gulp.task('jade', function () {
   gulp.src(gconf.src.index)
       .pipe(plugins.jade({
         locals: {
-          app: gconf.app,
+          app: gconf.app.name,
           name: pkg.name,
           version: pkg.version
         },
