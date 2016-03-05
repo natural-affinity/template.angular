@@ -4,7 +4,8 @@
   "dependencies": {
     "angular": "~1.5.x",
     "angular-route": "~1.5.x",
-    "angular-loader": "~1.5.x"
+    "angular-loader": "~1.5.x",
+    "angular-material": "~1.x"
   },
   "devDependencies": {}
 }

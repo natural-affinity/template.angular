@@ -12,7 +12,6 @@ var pkg = require('./package.json');
 var pretty = yargs.argv.pretty || true;
 var cfg = yargs.argv.env || './conf/local.json';
 var app = require(cfg);
-console.log(app);
 
 var gconf = {
   src: {
@@ -25,7 +24,7 @@ var gconf = {
     root: 'dist/',
     index: 'index.html',
     styles: {
-      root: 'dist/styles',
+      root: 'dist/styles/',
       app: 'app.min.css',
       lib: 'lib.min.css'
     },
@@ -48,6 +47,12 @@ gulp.task('copy:html', function () {
       .pipe(gulp.dest(gconf.dist.root));
 });
 
+gulp.task('css:libs', function () {
+  gulp.src(['bower_components/angular-material/angular-material.min.css'])
+      .pipe(plugins.concat(gconf.dist.styles.app))
+      .pipe(gulp.dest(gconf.dist.styles.root));
+});
+
 gulp.task('jshint', function () {
   return gulp.src(['Gulpfile.js', gconf.src.scripts])
     .pipe(plugins.jshint())
@@ -56,8 +61,12 @@ gulp.task('jshint', function () {
 
 gulp.task('js:libs', function () {
   return gulp.src(['bower_components/angular/angular.min.js',
+                   'bower_components/angular/angular-animate/angular-animate.min.js',
+                   'bower_components/angular-aria/angular-aria/angular-aria.min.js',
+                   'bower_components/angular-messages/angular-messages.min.js',
                    'bower_components/angular-loader/angular-loader.min.js',
-                   'bower_components/angular-route/angular-route.min.js'])
+                   'bower_components/angular-route/angular-route.min.js',
+                   'bower_components/angular-material/angular-material.min.js'])
                    .pipe(plugins.concat(gconf.dist.scripts.lib))
                    .pipe(gulp.dest(gconf.dist.scripts.root));
 });
@@ -98,8 +107,9 @@ gulp.task('watch', function () {
 });
 
 gulp.task('js', ['jshint', 'js:libs', 'js:dist']);
+gulp.task('css', ['css:libs']);
 gulp.task('html', ['copy:html', 'jade']);
-gulp.task('build', ['js', 'html']);
+gulp.task('build', ['js', 'css', 'html']);
 gulp.task('server', ['build', 'webserver', 'watch']);
 gulp.task('default', ['clean', 'build']);
 gulp.task('help', tasklist);

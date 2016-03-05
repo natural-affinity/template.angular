@@ -12,7 +12,7 @@ Defaults
 --------
 * Build: Gulp
 * Icons: Font-Awesome
-* Styles: Bootstrap, Sass
+* Styles: Angular Material, Sass
 * Framework: Angular (1.x)
 * Templates: Jade
 
@@ -56,11 +56,13 @@ Directory Structure
 |-- Gulpfile.js: all gulp build, deploy, compile, serve tasks
 |-- conf: environment-specific configuration settings
 |-- dist: deployment-ready application assets
-|-- test: test-ready assets
 |-- src: application source code
     |-- index.jade
     |-- app.js (application setup)
     |-- images (image assets)
+    |-- [feature]
+        |-- [feature template].html
+        |-- [feature logic].js
     |-- components (javascript assets)
         |-- [component name]
             |-- [component template].html
