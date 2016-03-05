@@ -2,17 +2,19 @@
 
 var del = require('del');
 var gulp = require('gulp');
+var yargs = require('yargs');
 var stylish = require('jshint-stylish');
 var plugins = require('gulp-load-plugins')();
 var tasklist = require('gulp-task-listing');
 
 // read package.json
 var pkg = require('./package.json');
+var pretty = yargs.argv.pretty || true;
+var cfg = yargs.argv.env || './conf/local.json';
+var app = require(cfg);
+console.log(app);
 
 var gconf = {
-  app: {
-    name: 'myApp'
-  },
   src: {
     root: 'src/',
     index: 'src/index.jade',
@@ -63,7 +65,7 @@ gulp.task('js:libs', function () {
 gulp.task('js:dist', function () {
   return gulp.src(['src/**/*.js'])
     .pipe(plugins.concat(gconf.dist.scripts.app))
-    .pipe(plugins.replace('replace.application.name', gconf.app.name))
+    .pipe(plugins.replace('replace.application.name', app.namespace))
     .pipe(gulp.dest(gconf.dist.scripts.root));
 });
 
@@ -71,7 +73,7 @@ gulp.task('jade', function () {
   gulp.src(gconf.src.index)
       .pipe(plugins.jade({
         locals: {
-          app: gconf.app.name,
+          app: app.namespace,
           name: pkg.name,
           version: pkg.version
         },

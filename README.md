@@ -20,7 +20,7 @@ Features
 --------
 * Application Setup Scripts
 * Suggested Directory Layout
-* Sample View Namespaced-Mixins
+* Environment-based JSON Configurations
 
 * Quick Watch-Livereload Refactor Cycle
 
@@ -39,17 +39,12 @@ $ ./bin/setup.sh
 ### Workflow
 The `grunt serve` (watch, livereload) loop is designed to accelerate development workflow:
 ```bash
-$ grunt serve:dev
-```
-
-Alternatively, to simply run the application in standalone-mode, invoke:
-```bash
-$ grunt serve
+$ gulp server
 ```
 
 Environment-based parameters are stored in `conf`, to switch between them invoke:
 ```bash
-$ grunt --env=conf\dev.json serve
+$ gulp build --env=./conf/dev.json
 ```
 
 Directory Structure
@@ -59,6 +54,7 @@ Directory Structure
 |-- bower.json: runtime dependencies (angular, bootstrap)
 |-- package.json: development dependencies (gulp plugins)
 |-- Gulpfile.js: all gulp build, deploy, compile, serve tasks
+|-- conf: environment-specific configuration settings
 |-- dist: deployment-ready application assets
 |-- test: test-ready assets
 |-- src: application source code
@@ -75,7 +71,6 @@ Directory Structure
 Future Considerations
 ---------------------
 * [ ] Gulp Tasks Separated into folders
-* [ ] Environment-based JSON Configurations
 * [ ] Testing Frameworks
 
 License
