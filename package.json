@@ -1,0 +1,28 @@
+{
+  "name": "application.name",
+  "version": "0.0.1",
+  "description": "application description",
+  "author": {
+    "name": "Rizwan Tejpar",
+    "email": "rtejpar@rtcodespark.com"
+  },
+  "keywords": [],
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "del": "~2.2.x",
+    "gulp": "~3.9.x",
+    "gulp-concat": "~2.6.x",
+    "gulp-jade": "~1.1.x",
+    "gulp-jshint": "~2.0.x",
+    "gulp-load-plugins": "~1.2.x",
+    "gulp-rename": "~1.2.x",
+    "gulp-task-listing": "^1.0.1",
+    "gulp-webserver": "^0.9.1",
+    "jshint": "~2.9.x",
+    "jshint-stylish": "~2.1.x"
+  },
+  "engines": {
+    "node": ">=5.5.0"
+  }
+}
