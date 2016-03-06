@@ -74,14 +74,14 @@ gulp.task('jshint', function () {
 
 gulp.task('js:libs', function () {
   return gulp.src(['bower_components/angular/angular.min.js',
-                   'bower_components/angular/angular-animate/angular-animate.min.js',
-                   'bower_components/angular-aria/angular-aria/angular-aria.min.js',
-                   'bower_components/angular-messages/angular-messages.min.js',
-                   'bower_components/angular-loader/angular-loader.min.js',
-                   'bower_components/angular-route/angular-route.min.js',
-                   'bower_components/angular-material/angular-material.min.js'])
-                   .pipe(plugins.concat(gconf.dist.scripts.lib))
-                   .pipe(gulp.dest(gconf.dist.scripts.root));
+    'bower_components/angular/angular-animate/angular-animate.min.js',
+    'bower_components/angular-aria/angular-aria/angular-aria.min.js',
+    'bower_components/angular-messages/angular-messages.min.js',
+    'bower_components/angular-loader/angular-loader.min.js',
+    'bower_components/angular-route/angular-route.min.js',
+    'bower_components/angular-material/angular-material.min.js'])
+    .pipe(plugins.concat(gconf.dist.scripts.lib))
+    .pipe(gulp.dest(gconf.dist.scripts.root));
 });
 
 gulp.task('js:dist', function () {
@@ -89,7 +89,7 @@ gulp.task('js:dist', function () {
     .pipe(plugins.concat(gconf.dist.scripts.app))
     .pipe(plugins.replace('replace.application.name', app.namespace))
     .pipe(plugins.ngAnnotate())
-    .pipe(plugins.uglify({compress: true}))
+    .pipe(plugins.uglify({compress: true, mangle: true}))
     .pipe(gulp.dest(gconf.dist.scripts.root));
 });
 
@@ -123,7 +123,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('js', ['jshint', 'js:libs', 'js:dist']);
-gulp.task('css', ['css:libs']);
+gulp.task('css', ['css:libs', 'css:dist']);
 gulp.task('html', ['copy:html', 'jade']);
 gulp.task('build', ['js', 'css', 'html']);
 gulp.task('server', ['build', 'webserver', 'watch']);
