@@ -88,6 +88,8 @@ gulp.task('js:dist', function () {
   return gulp.src(['src/**/*.js'])
     .pipe(plugins.concat(gconf.dist.scripts.app))
     .pipe(plugins.replace('replace.application.name', app.namespace))
+    .pipe(plugins.ngAnnotate())
+    .pipe(plugins.uglify({compress: true}))
     .pipe(gulp.dest(gconf.dist.scripts.root));
 });
 
@@ -125,5 +127,5 @@ gulp.task('css', ['css:libs']);
 gulp.task('html', ['copy:html', 'jade']);
 gulp.task('build', ['js', 'css', 'html']);
 gulp.task('server', ['build', 'webserver', 'watch']);
-gulp.task('default', ['clean', 'build']);
+gulp.task('default', ['build']);
 gulp.task('help', tasklist);
