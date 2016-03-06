@@ -85,7 +85,7 @@ gulp.task('js:libs', function () {
 });
 
 gulp.task('js:dist', function () {
-  return gulp.src(['src/**/*.js'])
+  return gulp.src([gconf.src.scripts])
     .pipe(plugins.concat(gconf.dist.scripts.app))
     .pipe(plugins.replace('replace.application.name', app.namespace))
     .pipe(plugins.ngAnnotate())
