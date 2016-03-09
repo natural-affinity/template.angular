@@ -19,7 +19,15 @@ var gconf = {
     root: 'src/',
     index: 'src/index.jade',
     styles: 'src/sass/**/*.scss',
-    scripts: 'src/**/*.js',
+    scripts: {
+      all: 'src/**/*.js',
+      main: 'src/app.js',
+      modules: 'src/**/module.*.js',
+      filters: 'src/**/filter.*.js',
+      services: 'src/**/service.*.js',
+      controllers: 'src/**/controller.*.js',
+      directives: 'src/**/directive/*.js'
+    },
     templates: 'src/**/*.html'
   },
   dist: {
@@ -67,7 +75,7 @@ gulp.task('css:dist', function () {
 
 
 gulp.task('jshint', function () {
-  return gulp.src(['Gulpfile.js', gconf.src.scripts])
+  return gulp.src(['Gulpfile.js', gconf.src.scripts.all])
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter(stylish));
 });
@@ -85,7 +93,12 @@ gulp.task('js:libs', function () {
 });
 
 gulp.task('js:dist', function () {
-  return gulp.src([gconf.src.scripts])
+  return gulp.src([gconf.src.scripts.main,
+                   gconf.src.scripts.modules,
+                   gconf.src.scripts.filters,
+                   gconf.src.scripts.services,
+                   gconf.src.scripts.controllers,
+                   gconf.src.scripts.directives])
     .pipe(plugins.concat(gconf.dist.scripts.app))
     .pipe(plugins.replace('replace.application.name', app.namespace))
     .pipe(plugins.ngAnnotate())
@@ -117,7 +130,7 @@ gulp.task('webserver', function () {
 gulp.task('watch', function () {
   gulp.watch([gconf.src.index], ['jade']);
   gulp.watch([gconf.src.styles], ['css:dist']);
-  gulp.watch([gconf.src.scripts], ['jshint', 'js:dist']);
+  gulp.watch([gconf.src.scripts.all], ['jshint', 'js:dist']);
   gulp.watch([gconf.src.templates], ['copy:html', 'jade']);
   gulp.watch(['Gulpfile.js'], ['build']);
 });

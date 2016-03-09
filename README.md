@@ -11,7 +11,7 @@ Prerequisites
 Defaults
 --------
 * Build: Gulp
-* Icons: Font-Awesome
+* Icons: Material
 * Styles: Angular Material, Sass
 * Framework: Angular (1.x)
 * Templates: Jade
@@ -37,7 +37,7 @@ $ ./bin/setup.sh
 ```
 
 ### Workflow
-The `grunt serve` (watch, livereload) loop is designed to accelerate development workflow:
+The `gulp serve` (watch, livereload) loop is designed to accelerate development workflow:
 ```bash
 $ gulp server
 ```
@@ -59,15 +59,12 @@ Directory Structure
 |-- src: application source code
     |-- index.jade
     |-- app.js (application setup)
+    |-- controller.application.js (optional)
     |-- sass (stylesheet assets)
     |-- images (image assets)
-    |-- [feature]
-        |-- [feature template].html
-        |-- [feature logic].js
-    |-- components (javascript assets)
-        |-- [component name]
-            |-- [component template].html
-            |-- [component logic].js
+    |-- [feature|component]
+        |-- template.[name].html
+        |-- [module|filter|directive|controller|service].[name].js
 
 </pre>
 
