@@ -10,8 +10,9 @@ html(lang="en")
     link(rel="stylesheet" href="styles/lib.min.css")
     link(rel="stylesheet" href="styles/app.min.css")
 
-  body(ng-app="#{app}" ng-strict-di)
-    p Main
+  body(ng-app="#{app}" ng-strict-di layout="row")
+    template-sidebar
+    div(layout="column" flex)
 
     script(src="scripts/lib.min.js")
     script(src="scripts/app.min.js")

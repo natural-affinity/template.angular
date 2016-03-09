@@ -22,15 +22,17 @@ var gconf = {
     scripts: {
       all: 'src/**/*.js',
       main: 'src/app.js',
-      modules: 'src/**/module.*.js',
-      filters: 'src/**/filter.*.js',
-      services: 'src/**/service.*.js',
-      controllers: 'src/**/controller.*.js',
-      directives: 'src/**/directive/*.js'
+      router: 'src/*.router.js',
+      modules: 'src/**/*.module.js',
+      filters: 'src/**/*.filter.js',
+      services: 'src/**/*.service.js',
+      controllers: 'src/**/*.controller.js',
+      directives: 'src/**/*.directive.js'
     },
     templates: 'src/**/*.html'
   },
   dist: {
+    all: 'dist/**/*',
     root: 'dist/',
     index: 'index.html',
     styles: {
@@ -47,14 +49,11 @@ var gconf = {
 };
 
 gulp.task('clean', function () {
-  return del([
-    'dist/**/*'
-  ]);
+  return del([gconf.dist.all]);
 });
 
 gulp.task('copy:html', function () {
-  gulp.src(gconf.src.templates)
-      .pipe(gulp.dest(gconf.dist.root));
+  gulp.src(gconf.src.templates).pipe(gulp.dest(gconf.dist.root));
 });
 
 gulp.task('css:libs', function () {
@@ -75,15 +74,16 @@ gulp.task('css:dist', function () {
 
 
 gulp.task('jshint', function () {
-  return gulp.src(['Gulpfile.js', gconf.src.scripts.all])
+  return gulp.src(['Gulpfile.js',
+                   gconf.src.scripts.all])
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter(stylish));
 });
 
 gulp.task('js:libs', function () {
-  return gulp.src(['bower_components/angular/angular.min.js',
-    'bower_components/angular/angular-animate/angular-animate.min.js',
-    'bower_components/angular-aria/angular-aria/angular-aria.min.js',
+  return gulp.src(['bower_components/angular/angular.js',
+    'bower_components/angular-animate/angular-animate.min.js',
+    'bower_components/angular-aria/angular-aria.min.js',
     'bower_components/angular-messages/angular-messages.min.js',
     'bower_components/angular-loader/angular-loader.min.js',
     'bower_components/angular-route/angular-route.min.js',
@@ -94,6 +94,7 @@ gulp.task('js:libs', function () {
 
 gulp.task('js:dist', function () {
   return gulp.src([gconf.src.scripts.main,
+                   gconf.src.scripts.router,
                    gconf.src.scripts.modules,
                    gconf.src.scripts.filters,
                    gconf.src.scripts.services,
@@ -102,7 +103,7 @@ gulp.task('js:dist', function () {
     .pipe(plugins.concat(gconf.dist.scripts.app))
     .pipe(plugins.replace('replace.application.name', app.namespace))
     .pipe(plugins.ngAnnotate())
-    .pipe(plugins.uglify({compress: true, mangle: true}))
+    //.pipe(plugins.uglify({compress: true, mangle: true}))
     .pipe(gulp.dest(gconf.dist.scripts.root));
 });
 
