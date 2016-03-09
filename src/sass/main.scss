@@ -1,7 +1,18 @@
 // import frameworks: bootstrap, font-awesome, etc.
 
+// import reusable functions (no deps)
+@import 'functions';
+
 // imports (partials)
-@import "error";
+@import 'fonts';
+@import 'swatches';
+@import 'overrides';
+@import 'transition';
+@import 'button';
+@import 'link';
+@import 'error';
+@import 'input';
+@import 'form';
 
 //primary
 
