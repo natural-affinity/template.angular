@@ -4,11 +4,11 @@
   width: 32px;
 }
 
-.md-toolbar-tools md-icon.android-icon { color: $lime-400; }
+.md-toolbar-tools md-icon.android-icon { color: swatch(lime); }
 template-sidebar,
 md-list {
   padding-top: 0px;
-  background-color: #90A4AE;
+  background-color: swatch(bluegrey);
 }
 
 md-list-item:hover,

@@ -1,2 +1,16 @@
-$lime-400: #D4E157;
-$bluegrey-400: #78909C;
+
+// define color palette
+$default_swatch: (
+  lime: (
+    light: rgb(212,225,87)
+  ),
+  bluegrey: (
+    light: rgb(144,164,174)
+  )
+);
+
+// e.g. swatch('blue', 'light', 0.7)
+@function swatch($color, $tone: 'light', $opacity: 1) {
+    $rgb: map-get(map-get($default_swatch, $color), $tone);
+    @return rgba($rgb, $opacity);
+}
