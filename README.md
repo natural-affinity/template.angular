@@ -58,12 +58,17 @@ Directory Structure
 |-- src: application source code
     |-- index.jade
     |-- app.js (application setup)
-    |-- controller.application.js (optional)
+    |-- app.router.js (application router)
+    |-- app.controller.js (application controller)
     |-- sass (stylesheet assets)
     |-- images (image assets)
-    |-- [feature|component]
-        |-- template.[name].html
-        |-- [module|filter|directive|controller|service].[name].js
+    |-- [feature or component]
+        |-- [name].template.html
+        |-- [name].module.js
+        |-- [name].filter.js
+        |-- [name].service.js
+        |-- [name].directive.js
+        |-- [name].controller.js
 
 </pre>
 
