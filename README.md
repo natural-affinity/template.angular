@@ -21,7 +21,6 @@ Features
 * Application Setup Scripts
 * Suggested Directory Layout
 * Environment-based JSON Configurations
-
 * Quick Watch-Livereload Refactor Cycle
 
 Usage and Documentation
