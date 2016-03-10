@@ -103,7 +103,7 @@ gulp.task('js:dist', function () {
     .pipe(plugins.concat(gconf.dist.scripts.app))
     .pipe(plugins.replace('replace.application.name', app.namespace))
     .pipe(plugins.ngAnnotate())
-    //.pipe(plugins.uglify({compress: true, mangle: true}))
+    .pipe(plugins.uglify({compress: true, mangle: true}))
     .pipe(gulp.dest(gconf.dist.scripts.root));
 });
 

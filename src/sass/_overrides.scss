@@ -1,0 +1,17 @@
+.md-32 {
+  font-size: 32px;
+  height: 32px;
+  width: 32px;
+}
+
+.md-toolbar-tools md-icon.android-icon { color: $lime-400; }
+template-sidebar,
+md-list {
+  padding-top: 0px;
+  background-color: #90A4AE;
+}
+
+md-list-item:hover,
+md-list-item a.md-button.md-no-style:hover {
+  background-color: #81D4FA;
+}
