@@ -81,13 +81,14 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('js:libs', function () {
-  return gulp.src(['bower_components/angular/angular.js',
-    'bower_components/angular-animate/angular-animate.min.js',
-    'bower_components/angular-aria/angular-aria.min.js',
-    'bower_components/angular-messages/angular-messages.min.js',
-    'bower_components/angular-loader/angular-loader.min.js',
-    'bower_components/angular-route/angular-route.min.js',
-    'bower_components/angular-material/angular-material.min.js'])
+  return gulp.src(['angular/angular.min.js',
+                   'angular-animate/angular-animate.min.js',
+                   'angular-aria/angular-aria.min.js',
+                   'angular-messages/angular-messages.min.js',
+                   'angular-loader/angular-loader.min.js',
+                   'angular-route/angular-route.min.js',
+                   'angular-material/angular-material.min.js'],
+                   {cwd: 'bower_components'})
     .pipe(plugins.concat(gconf.dist.scripts.lib))
     .pipe(gulp.dest(gconf.dist.scripts.root));
 });
